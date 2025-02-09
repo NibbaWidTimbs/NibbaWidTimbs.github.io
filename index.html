@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GitHub Celebration</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        body { text-align: center; background: #fff; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+        button { padding: 25px 50px; font-size: 28px; background: #ff4444; color: white; border: none; border-radius: 15px; cursor: pointer; margin: 20px auto; transition: 0.3s; }
+        button:hover { transform: scale(1.1); box-shadow: 0 0 30px #ff4444; }
+        #message { display: none; font-size: 52px; font-weight: bold; margin: 25px; color: #2ecc71; }
+        .dog { width: 300px; border-radius: 15px; margin: 15px auto; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+    </style>
+</head>
+<body>
+    <button onclick="celebrate()">CELEBRATE NOW 🎉</button>
+    <div id="message">SUCCESS! YOU DID IT! 🥳</div>
+
+    <script>
+        function celebrate() {
+            // Show message
+            document.getElementById('message').style.display = 'block';
+            
+            // Add random dog image
+            const dogImg = document.createElement('img');
+            dogImg.className = 'dog';
+            dogImg.src = `https://source.unsplash.com/featured/?dog,cute${Date.now()}`;
+            document.body.appendChild(dogImg);
+
+            // Confetti explosion
+            confetti({ particleCount: 200, spread: 120, origin: { y: 0.6 } });
+            
+            // Scroll to show new content
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
