@@ -64,15 +64,20 @@
     <div id="message">YOU'RE PAW-SOME! 🎉</div>
 
     <script>
-        // Confetti sound effect (substitute for original sound)
-        const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/3003/3003-preview.mp3');
+        // Fireworks sound effect (URL from Mixkit)
+        const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/3460/3460-preview.mp3'); // Fireworks sound
         
-        // Guaranteed dog images array
+        // Expanded list of dog images
         const dogImages = [
             'https://images.unsplash.com/photo-1587300003388-59208cc962cb',
             'https://images.unsplash.com/photo-1534361960057-19889db9621e',
             'https://images.unsplash.com/photo-1517849845537-4d257902454a',
-            'https://images.unsplash.com/photo-1561037404-61cd46aa615b'
+            'https://images.unsplash.com/photo-1561037404-61cd46aa615b',
+            'https://images.unsplash.com/photo-1574158622684-6b98f5a18e84',
+            'https://images.unsplash.com/photo-1592194996308-7b43878e84a6',
+            'https://images.unsplash.com/photo-1561036649-1e908c604c34',
+            'https://images.unsplash.com/photo-1592194996516-2f4c08d48df9',
+            'https://images.unsplash.com/photo-1587300003388-5b47f1791d06'
         ];
 
         function celebrate() {
@@ -93,7 +98,7 @@
                 colors: ['#FF69B4', '#40E0D0', '#FFD700', '#FF4500']
             });
 
-            // Play confetti sound
+            // Play fireworks sound
             audio.currentTime = 0;
             audio.play().catch(() => {
                 alert("Allow audio permissions for full experience! 🔈");
