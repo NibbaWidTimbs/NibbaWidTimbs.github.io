@@ -15,8 +15,8 @@
         }
 
         button {
-            width: 150px;
-            height: 150px;
+            width: 300px; /* 100% bigger */
+            height: 300px; /* 100% bigger */
             font-size: 28px;
             background: #ff4444;
             color: white;
@@ -25,6 +25,10 @@
             cursor: pointer;
             margin: 20px auto;
             transition: 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
         button:hover {
@@ -53,31 +57,16 @@
         .dog-img.visible {
             opacity: 1;
         }
-
-        #counter {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
     </style>
 </head>
 <body>
-    <div id="counter">Celebrations: <span id="count">0</span></div>
     <button onclick="celebrate()">CLICK FOR JOY! 🐾</button>
     <div id="message">YOU'RE PAW-SOME! 🎉</div>
 
     <script>
-        // Working sound effect (applause)
+        // Confetti sound effect (substitute for original sound)
         const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/3003/3003-preview.mp3');
         
-        // Click counter
-        let count = localStorage.getItem('clickCount') || 0;
-        document.getElementById('count').textContent = count;
-
         // Guaranteed dog images array
         const dogImages = [
             'https://images.unsplash.com/photo-1587300003388-59208cc962cb',
@@ -104,16 +93,11 @@
                 colors: ['#FF69B4', '#40E0D0', '#FFD700', '#FF4500']
             });
 
-            // Play sound
+            // Play confetti sound
             audio.currentTime = 0;
             audio.play().catch(() => {
                 alert("Allow audio permissions for full experience! 🔈");
             });
-
-            // Update counter
-            count++;
-            localStorage.setItem('clickCount', count);
-            document.getElementById('count').textContent = count;
 
             // Fade-in the image
             setTimeout(() => {
