@@ -15,12 +15,13 @@
         }
 
         button {
-            padding: 25px 50px;
+            width: 150px;
+            height: 150px;
             font-size: 28px;
             background: #ff4444;
             color: white;
             border: none;
-            border-radius: 15px;
+            border-radius: 50%; /* Circular button */
             cursor: pointer;
             margin: 20px auto;
             transition: 0.3s;
@@ -45,7 +46,12 @@
             object-fit: cover;
             border-radius: 15px;
             margin: 20px auto;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: opacity 1s; /* Fade-in effect */
+        }
+
+        .dog-img.visible {
+            opacity: 1;
         }
 
         #counter {
@@ -109,11 +115,22 @@
             localStorage.setItem('clickCount', count);
             document.getElementById('count').textContent = count;
 
+            // Fade-in the image
+            setTimeout(() => {
+                img.classList.add('visible');
+            }, 100);
+
             // Scroll to new image
             window.scrollTo({
                 top: document.body.scrollHeight,
                 behavior: 'smooth'
             });
+
+            // Reset after 30 seconds
+            setTimeout(() => {
+                document.getElementById('message').style.display = 'none';
+                img.remove(); // Remove the dog image
+            }, 30000); // 30 seconds
         }
     </script>
 </body>
