@@ -1,36 +1,119 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>GitHub Celebration</title>
+    <title>Celebration Fix</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
-        body { text-align: center; background: #fff; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
-        button { padding: 25px 50px; font-size: 28px; background: #ff4444; color: white; border: none; border-radius: 15px; cursor: pointer; margin: 20px auto; transition: 0.3s; }
-        button:hover { transform: scale(1.1); box-shadow: 0 0 30px #ff4444; }
-        #message { display: none; font-size: 52px; font-weight: bold; margin: 25px; color: #2ecc71; }
-        .dog { width: 300px; border-radius: 15px; margin: 15px auto; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+        body {
+            text-align: center;
+            background: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+        }
+
+        button {
+            padding: 25px 50px;
+            font-size: 28px;
+            background: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            margin: 20px auto;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px #ff4444;
+        }
+
+        #message {
+            display: none;
+            font-size: 52px;
+            font-weight: bold;
+            margin: 25px;
+            color: #2ecc71;
+        }
+
+        .dog-img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        #counter {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 <body>
-    <button onclick="celebrate()">CELEBRATE NOW 🎉</button>
-    <div id="message">SUCCESS! YOU DID IT! 🥳</div>
+    <div id="counter">Celebrations: <span id="count">0</span></div>
+    <button onclick="celebrate()">CLICK FOR JOY! 🐾</button>
+    <div id="message">YOU'RE PAW-SOME! 🎉</div>
 
     <script>
+        // Working sound effect (applause)
+        const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/3003/3003-preview.mp3');
+        
+        // Click counter
+        let count = localStorage.getItem('clickCount') || 0;
+        document.getElementById('count').textContent = count;
+
+        // Guaranteed dog images array
+        const dogImages = [
+            'https://images.unsplash.com/photo-1587300003388-59208cc962cb',
+            'https://images.unsplash.com/photo-1534361960057-19889db9621e',
+            'https://images.unsplash.com/photo-1517849845537-4d257902454a',
+            'https://images.unsplash.com/photo-1561037404-61cd46aa615b'
+        ];
+
         function celebrate() {
             // Show message
             document.getElementById('message').style.display = 'block';
-            
-            // Add random dog image
-            const dogImg = document.createElement('img');
-            dogImg.className = 'dog';
-            dogImg.src = `https://source.unsplash.com/featured/?dog,cute${Date.now()}`;
-            document.body.appendChild(dogImg);
 
-            // Confetti explosion
-            confetti({ particleCount: 200, spread: 120, origin: { y: 0.6 } });
-            
-            // Scroll to show new content
-            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            // Add random dog image
+            const img = document.createElement('img');
+            img.className = 'dog-img';
+            img.src = dogImages[Math.floor(Math.random() * dogImages.length)] + `?auto=format&fit=crop&w=300&h=300&q=80&${Date.now()}`;
+            document.body.appendChild(img);
+
+            // Confetti
+            confetti({
+                particleCount: 200,
+                spread: 120,
+                origin: { y: 0.6 },
+                colors: ['#FF69B4', '#40E0D0', '#FFD700', '#FF4500']
+            });
+
+            // Play sound
+            audio.currentTime = 0;
+            audio.play().catch(() => {
+                alert("Allow audio permissions for full experience! 🔈");
+            });
+
+            // Update counter
+            count++;
+            localStorage.setItem('clickCount', count);
+            document.getElementById('count').textContent = count;
+
+            // Scroll to new image
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: 'smooth'
+            });
         }
     </script>
 </body>
